@@ -1,14 +1,15 @@
 # SCInsta
 A feature-rich tweak for Instagram on iOS!\
-`Version v0.6.0` | `Tested on Instagram v350.0.12`
+`Version v0.7.1` | `Tested on Instagram 384.0.0`
 
 ---
 
 > [!NOTE]
+> ⚙️ &nbsp;To modify SCInsta's settings, check out [this page](https://github.com/SoCuul/SCInsta/wiki/Modify-Settings) for help\
 > ❓ &nbsp;If you have any questions or need help with the tweak, visit the [Discussions](https://github.com/SoCuul/SCInsta/discussions) tab
 >
-> ✨ &nbsp;If you have a feature request, [click here](https://github.com/SoCuul/SCInsta/issues/new?labels=enhancement&title=feat:%20replace%20this%20text%20with%20your%20feature%20request)\
-> 🐛 &nbsp;If you have a bug report, [click here](https://github.com/SoCuul/SCInsta/issues/new?labels=bug&title=bug:%20replace%20this%20with%20a%20summary%20of%20the%20issue%20you're%20experiencing)
+> ✨ &nbsp;If you have a feature request, [click here](https://github.com/SoCuul/SCInsta/issues/new/choose)\
+> 🐛 &nbsp;If you have a bug report, [click here](https://github.com/SoCuul/SCInsta/issues/new/choose)
 > 
 
 ---
@@ -23,12 +24,15 @@ A feature-rich tweak for Instagram on iOS!\
 ### General
 - Hide Meta AI
 - Copy description
-- Hide reels tab
+- Use detailed color picker
 - Disable scrolling reels
 - Do not save recent searches
 - Hide explore posts grid
 - Hide trending searches
+- Hide friends map
 - No suggested chats (in dms)
+- No suggested users
+- Hide notes tray
 
 ### Feed
 - Hide ads
@@ -40,14 +44,20 @@ A feature-rich tweak for Instagram on iOS!\
 - No suggested threads posts
 
 ### Confirm actions
-- Confirm like: Posts
+- Confirm like: Posts (and stories)
 - Confirm like: Reels
 - Confirm follow
 - Confirm call
 - Confirm voice messages
+- Confirm shh mode (disappearing messages)
 - Confirm sticker interaction
 - Confirm posting comment
 - Confirm changing theme
+
+### Hide navigation tabs
+- Hide explore tab
+- Hide create tab
+- Hide reels tab
 
 ### Save media (partially broken)
 - Download images/videos
@@ -59,6 +69,7 @@ A feature-rich tweak for Instagram on iOS!\
 - Disabling sending read receipts
 - Remove screenshot alert
 - Disable story seen receipt
+- Disable view-once limitations
 
 ### Security
 - Padlock (require biometric authentication to open the app)
@@ -67,7 +78,14 @@ A feature-rich tweak for Instagram on iOS!\
 - Automatically clears unneeded cache folders, reducing the size of your Instagram installation
 
 ### Built-in Tweak Settings
-> Long press on the **large Instagram logo** at the top of your feed to bring up the SCInsta tweak settings
+[How to modify SCInsta settings](https://github.com/SoCuul/SCInsta/wiki/Modify-Settings)
+
+# In-App Screenshots
+
+|                                             |                                             |                                             |
+|:-------------------------------------------:|:-------------------------------------------:|:-------------------------------------------:|
+| <img src="https://i.imgur.com/EZIktAw.png"> | <img src="https://i.imgur.com/aA3g1Vw.png"> | <img src="https://i.imgur.com/QdyFbo4.png"> |
+| <img src="https://i.imgur.com/Ydd61cZ.png"> | <img src="https://i.imgur.com/XGOn3lY.png"> | <img src="https://i.imgur.com/n4GFWl8.png"> |
 
 # Building from source
 ### Prerequisites
@@ -75,7 +93,7 @@ A feature-rich tweak for Instagram on iOS!\
 - [Homebrew](https://brew.sh/#install)
 - [CMake](https://formulae.brew.sh/formula/cmake#default) (`brew install cmake`)
 - [Theos](https://theos.dev/docs/installation)
-- [pyzule](https://github.com/asdfzxcvbn/pyzule?tab=readme-ov-file#installation) **\*only required for sideloading**
+- [cyan](https://github.com/asdfzxcvbn/pyzule-rw?tab=readme-ov-file#install-instructions) **\*only required for sideloading**
 
 ### Setup
 1. Install iOS 14.5 frameworks for theos
@@ -91,13 +109,6 @@ $ chmod +x build.sh
 $ ./build.sh <sideload/rootless/rootful>
 ```
 
-# In-App Screenshots
-
-|                                             |                                             |                                             |
-|:-------------------------------------------:|:-------------------------------------------:|:-------------------------------------------:|
-| <img src="https://i.imgur.com/hr3v0fk.png"> | <img src="https://i.imgur.com/gQZdtWp.png"> | <img src="https://i.imgur.com/iXIFLxG.png"> |
-| <img src="https://i.imgur.com/HMZ9n4D.png"> | <img src="https://i.imgur.com/JQcySt6.png"> |
-
 # Contributing
 Contributions to this tweak are greatly appreciated. Feel free to create a pull request if you would like to contribute.
 
@@ -112,4 +123,4 @@ There's many other ways to support this project however, by simply sharing a lin
 Seeing people use this tweak is what keeps me motivated to keep working on it ❤️
 
 # Credits
-- Huge thanks to [@BandarHL](https://github.com/BandarHL) for creating the original BHInstagram/BHInsta project, which SCInsta is based upon.
+- Huge thanks to [@BandarHL](https://github.com/BandarHL) for creating the original BHInstagram project, which SCInsta is based upon.

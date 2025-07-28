@@ -6,7 +6,7 @@
 - (id)viewModel {
     if ([[%orig title] isEqualToString:@"Suggested"]) {
 
-        if ([SCIManager getPref:@"no_suggested_chats"]) {
+        if ([SCIManager getBoolPref:@"no_suggested_chats"]) {
             NSLog(@"[SCInsta] Hiding suggested chats (header: channels tab)");
 
             return nil;
@@ -21,19 +21,21 @@
 // Messaages dms tab (suggestions header)
 %hook IGDirectInboxListAdapterDataSource
 - (id)objectsForListAdapter:(id)arg1 {
-    NSMutableArray *newObjs = [%orig mutableCopy];
+    NSArray *originalObjs = %orig();
+    NSMutableArray *filteredObjs = [NSMutableArray arrayWithCapacity:[originalObjs count]];
 
-    [newObjs enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    for (id obj in originalObjs) {
+        BOOL shouldHide = NO;
 
         // Section header
         if ([obj isKindOfClass:%c(IGDirectInboxHeaderCellViewModel)]) {
             
             // "Suggestions" header
             if ([[obj title] isEqualToString:@"Suggestions"]) {
-                if ([SCIManager getPref:@"hide_meta_ai"]) {
+                if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                     NSLog(@"[SCInsta] Hiding suggested chats (header: messages tab)");
 
-                    [newObjs removeObjectAtIndex:idx];
+                    shouldHide = YES;
                 }
             }
 
@@ -41,15 +43,20 @@
 
         // Suggested recipients
         if ([obj isKindOfClass:%c(IGDirectInboxSuggestedThreadCellViewModel)]) {
-            if ([SCIManager getPref:@"hide_meta_ai"]) {
+            if ([SCIManager getBoolPref:@"hide_meta_ai"]) {
                 NSLog(@"[SCInsta] Hiding suggested chats (recipients: channels tab)");
 
-                [newObjs removeObjectAtIndex:idx];
+                shouldHide = YES;
             }
         }
 
-    }];
+        // Populate new objs array
+        if (!shouldHide) {
+            [filteredObjs addObject:obj];
+        }
 
-    return [newObjs copy];
+    }
+
+    return [filteredObjs copy];
 }
 %end

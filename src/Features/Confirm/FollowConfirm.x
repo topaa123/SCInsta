@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////
 
 #define CONFIRMFOLLOW(orig)                            \
-    if ([SCIManager getPref:@"follow_confirm"]) {             \
+    if ([SCIManager getBoolPref:@"follow_confirm"]) {             \
         NSLog(@"[SCInsta] Confirm follow triggered");  \
                                                        \
         [SCIUtils showConfirmation:^(void) { orig; }]; \
@@ -56,7 +56,7 @@
 
 // Follow button on reels
 %hook IGUnifiedVideoFollowButton
-- (void)_hackilyHandleOurOwnButtonTaps:(id)arg1 {
+- (void)_hackilyHandleOurOwnButtonTaps:(id)arg1 event:(id)arg2 {
     CONFIRMFOLLOW(%orig);
 }
 %end

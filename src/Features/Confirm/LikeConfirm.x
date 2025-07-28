@@ -6,7 +6,7 @@
 // Confirmation handlers
 
 #define CONFIRMPOSTLIKE(orig)                             \
-    if ([SCIManager getPref:@"like_confirm"]) {           \
+    if ([SCIManager getBoolPref:@"like_confirm"]) {           \
         NSLog(@"[SCInsta] Confirm post like triggered");  \
                                                           \
         [SCIUtils showConfirmation:^(void) { orig; }];    \
@@ -16,7 +16,7 @@
     }                                                     \
 
 #define CONFIRMREELSLIKE(orig)                            \
-    if ([SCIManager getPref:@"like_confirm_reels"]) {     \
+    if ([SCIManager getBoolPref:@"like_confirm_reels"]) {     \
         NSLog(@"[SCInsta] Confirm reels like triggered"); \
                                                           \
         [SCIUtils showConfirmation:^(void) { orig; }];    \
@@ -57,7 +57,20 @@
 - (void)controlsOverlayControllerDidLongPressLikeButton:(id)arg1 gestureRecognizer:(id)arg2 {
     CONFIRMREELSLIKE(%orig);
 }
-- (void)controlsOverlayControllerDidTapLikedBySocialContextButton:(id)arg1 button:(id)arg2 {
+- (void)gestureController:(id)arg1 didObserveDoubleTap:(id)arg2 {
+    CONFIRMREELSLIKE(%orig);
+}
+%end
+%hook IGSundialViewerPhotoCell
+- (void)controlsOverlayControllerDidTapLikeButton:(id)arg1 {
+    CONFIRMREELSLIKE(%orig);
+}
+- (void)gestureController:(id)arg1 didObserveDoubleTap:(id)arg2 {
+    CONFIRMREELSLIKE(%orig);
+}
+%end
+%hook IGSundialViewerCarouselCell
+- (void)controlsOverlayControllerDidTapLikeButton:(id)arg1 {
     CONFIRMREELSLIKE(%orig);
 }
 - (void)gestureController:(id)arg1 didObserveDoubleTap:(id)arg2 {
@@ -91,6 +104,9 @@
 
 // Liking stories
 %hook IGStoryFullscreenDefaultFooterView
+- (void)_handleLikeTapped {
+    CONFIRMPOSTLIKE(%orig);
+}
 - (void)_likeTapped {
     CONFIRMPOSTLIKE(%orig);
 }
